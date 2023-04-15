@@ -15,10 +15,46 @@
 Type safe React chat window. Easy integration. 
 
 
+
 ## Free dashboard
 
-This React chat window comes with a free tier dashboard, and easy instructions on how to link them together. 
+This React chat window comes with a free tier dashboard, and instructions on how to link them together. 
 For more info, [click here](https://speak-base.com)
+
+![dashboard](https://user-images.githubusercontent.com/36661261/232245763-9450f9ad-6658-4836-98cf-7ae3aa8b8986.png)
+
+## Setup
+
+After installation, you can setup the actual code. You can do this by navigating to the top most node in your project (Usually ```app.js```) and add the chat window:
+
+```jsx
+import { ChatWindow } from '@speakbase/react-chat-window'; // Add the import
+import '@speakbase/react-chat-window/index.css'; // Add the styles
+
+export function App() {
+  return (
+    <>
+
+      {/* The rest of your app */}
+
+      <ChatWindow
+        {/*
+        A token is obtained by signing up for a free dashboard at https://speak-base.com
+        However, the chat window can also be used without a token/dashboard.
+        */}
+        token="3a4bb24b-6fee-47de-997f-4bf77de3a282"
+        position="right" 
+        onMessageSent={(message: string) => console.log(message)}
+      />
+    </>
+  );
+}
+
+export default App;
+
+```
+
+Note: Providing a token will take care of everything. You will not have to implemented the ```onMessageSent``` handler when using our dashboard.
 
 ## Customizing 
 
@@ -35,6 +71,7 @@ export interface ChatWindowProps {
   closeElement?: React.ReactNode;
   sendText?: string;
   messageBoxPlaceholderText?: string;
+  onMessageSent?: (message: string) => void;
 }
 
 export interface message {
@@ -113,6 +150,14 @@ messageBoxPlaceholderText?: string;
 ```
 
 Optional message input placeholder text, which can be used to change the default **Type a message...** text.
+
+--------------
+```
+onMessageSent?: (message: string) => void;
+```
+
+Optional on message sent handler, where message is the string input.
+
 
 
 ### Chat window props

@@ -49,7 +49,7 @@ export interface org {
   headerTitleText?: string;
   headerSubtitleWaitingText?: string;
   headerSubtitleStartText?: string;
-  headerSubtitleChatText?: (p?: { agent?: string }) => string;
+  headerSubtitleChatText?: string;
   closeElement?: React.ReactNode;
   sendText?: string;
   messageBoxPlaceholderText?: string;
@@ -223,28 +223,30 @@ export const MessageWindow = (props: ChatWindowProps) => {
         props.headerTitleText || orgInfo.headerTitleText || 'Customer support'
       }
       headerSubtitleWaitingText={
-        (props.headerSubtitleText
-          ? () => props.headerSubtitleText as string
-          : null) ||
         (orgInfo.headerSubtitleWaitingText
           ? () => orgInfo.headerSubtitleWaitingText as string
+          : null) ||
+        (props.headerSubtitleText
+          ? () => props.headerSubtitleText as string
           : null) ||
         (() => `We're connecting you to an agent.`)
       }
       headerSubtitleStartText={
-        (props.headerSubtitleText
-          ? () => props.headerSubtitleText as string
-          : null) ||
         (orgInfo.headerSubtitleStartText
           ? () => orgInfo.headerSubtitleStartText as string
+          : null) ||
+        (props.headerSubtitleText
+          ? () => props.headerSubtitleText as string
           : null) ||
         (() => `We'll connect you when you start typing.`)
       }
       headerSubtitleChatText={
+        (orgInfo.headerSubtitleChatText
+          ? () => orgInfo.headerSubtitleChatText as string
+          : null) ||
         (props.headerSubtitleText
           ? () => props.headerSubtitleText as string
           : null) ||
-        orgInfo.headerSubtitleChatText ||
         ((p?: { agent?: string }) => `Chatting with ${p?.agent}`)
       }
       orgInfo={orgInfo}
