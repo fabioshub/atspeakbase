@@ -1,11 +1,8 @@
 name: publish
-# on:
-#   push:
-#     tags:        
-#       - '*' 
-env:
-  RELEASE_VERSION: "0.1.1"
-on: push
+on:
+  push:
+    tags:        
+      - '*' 
 jobs:
   my-job:
     runs-on: ubuntu-latest
