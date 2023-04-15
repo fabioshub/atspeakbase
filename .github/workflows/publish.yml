@@ -9,4 +9,6 @@ jobs:
           fetch-depth: 0
       - run: npm ci --omit=dev
 
-      - run: npx nx affected -t lint --parallel=3
+      - run: npx nx run react-chat-window:build
+      - run: cd dist/libs/react-chat-window
+      - run: npm publish --access public
