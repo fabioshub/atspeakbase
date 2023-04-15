@@ -9,6 +9,7 @@ jobs:
           fetch-depth: 0
       - run: npm ci 
 
+      - run: echo 'hey'
       - run: npx nx run react-chat-window:build
       - run: echo //registry.npmjs.org/:_auth=${{ secrets.NPM_PUBLISH_KEY }} >> .npmrc
       - run: echo email=${{ secrets.NPM_PUBLISH_EMAIL }} >> .npmrc
