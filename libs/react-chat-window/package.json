@@ -1,12 +1,16 @@
 {
   "name": "@speakbase/react-chat-window",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
     ".": {
       "import": "./index.mjs",
       "require": "./index.js"
+    },
+    "./index.css": {
+      "import": "./index.css",
+      "require": "./index.css"
     }
   }
 }

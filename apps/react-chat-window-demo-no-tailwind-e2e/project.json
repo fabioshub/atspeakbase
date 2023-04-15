@@ -1,0 +1,35 @@
+{
+  "name": "react-chat-window-demo-no-tailwind-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/react-chat-window-demo-no-tailwind-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/react-chat-window-demo-no-tailwind-e2e/cypress.config.ts",
+        "devServerTarget": "react-chat-window-demo-no-tailwind:serve:development",
+        "testingType": "e2e"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "react-chat-window-demo-no-tailwind:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "react-chat-window-demo-no-tailwind:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/react-chat-window-demo-no-tailwind-e2e/**/*.{js,ts}"
+        ]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["react-chat-window-demo-no-tailwind"]
+}

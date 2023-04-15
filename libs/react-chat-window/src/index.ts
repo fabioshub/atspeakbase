@@ -1,1 +1,2 @@
-export * from './lib/react-chat-window';
+export * from './lib/window';
+export * from './lib/chat';
