@@ -11,7 +11,7 @@ jobs:
 
       - run: echo 'hey'
       - run: npx nx run react-chat-window:build
-      - run: echo //registry.npmjs.org/:_auth=${{ secrets.NPM_PUBLISH_KEY }} >> .npmrc
+      - run: echo //registry.npmjs.org/:_authToken=${{ secrets.NPM_PUBLISH_KEY }} >> .npmrc
       - run: echo email=${{ secrets.NPM_PUBLISH_EMAIL }} >> .npmrc
       - run: echo always-auth=true >> .npmrc
       - run: mv .npmrc dist/libs/react-chat-window
