@@ -5,10 +5,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        env:
+          NPM_PUBLISH_KEY: ${{ secrets.NPM_PUBLISH_KEY }}
+          NPM_PUBLISH_EMAIL: ${{ secrets.NPM_PUBLISH_EMAIL }}
         with:
           fetch-depth: 0
       - run: npm ci 
 
       - run: npx nx run react-chat-window:build
       - run: cd dist/libs/react-chat-window
+      - run: echo _auth=$NPM_PUBLISH_KEY >> .npmrc
+      - run: echo email=NPM_PUBLISH_EMAIL >> .npmrc
+      - run: echo always-auth=true >> .npmrc
       - run: npm publish --access public
