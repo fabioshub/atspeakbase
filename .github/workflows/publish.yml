@@ -1,5 +1,8 @@
-name: hello-world
-on: push
+name: publish
+on:
+  push:
+    tags:        
+      - '*' 
 jobs:
   my-job:
     runs-on: ubuntu-latest
@@ -7,13 +10,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - run: npm ci 
-
-      - run: echo 'hey'
-      - run: npx nx run react-chat-window:build
-      - run: echo //registry.npmjs.org/:_authToken=${{ secrets.NPM_PUBLISH_KEY }} >> .npmrc
-      - run: echo email=${{ secrets.NPM_PUBLISH_EMAIL }} >> .npmrc
-      - run: echo always-auth=true >> .npmrc
-      - run: mv .npmrc dist/libs/react-chat-window
-      - run: cd dist/libs/react-chat-window && cat .npmrc
-      - run: cd dist/libs/react-chat-window && npm publish --access public
+      - run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      # - run: npm ci 
+      # - run: npx nx run react-chat-window:build
+      # - run: echo //registry.npmjs.org/:_authToken=${{ secrets.NPM_PUBLISH_KEY }} >> .npmrc
+      # - run: echo email=${{ secrets.NPM_PUBLISH_EMAIL }} >> .npmrc
+      # - run: echo always-auth=true >> .npmrc
+      # - run: mv .npmrc dist/libs/react-chat-window
+      # - run: cd dist/libs/react-chat-window && npm publish --access public
