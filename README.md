@@ -5,7 +5,7 @@
   <p align="center">
     ✨ <a href="https://speak-base.com">https://speak-base.com</a> ✨
     <br/>
-    React chat window for Speak Base's dashboard or to be used standalone.
+    React chat window for Speak Base's dashboard or to be used **standalone** 🚀
   </p>
 </p>
 <br/>
@@ -16,7 +16,7 @@ Type safe React chat window. Easy integration.
 
 
 
-## Free dashboard
+## Free dashboard 🔥
 
 This React chat window comes with a free tier dashboard, and instructions on how to link them together. 
 For more info, [click here](https://speak-base.com)
