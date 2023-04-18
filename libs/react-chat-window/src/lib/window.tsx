@@ -98,7 +98,12 @@ export const ChatWindowContainer = (props: ChatWindowContainerProps) => {
 
   return (
     <div
-      style={{ width: '300px', borderRadius: '10px 10px 10px 10px' }}
+      style={{
+        width: '300px',
+        borderRadius: '10px 10px 10px 10px',
+        maxHeight: 'calc(100vh - 80px)',
+        height: '600px',
+      }}
       className={`${styles['fixed']} ${styles['bottom-10']} 
          
        ${styles['flex']} ${styles['flex-col']} ${styles['bg-white']} ${
@@ -158,7 +163,7 @@ export const ChatWindowContainer = (props: ChatWindowContainerProps) => {
       <div
         className={`${styles['overflow-auto']} ${styles['pt-3']}`}
         ref={props.messagesRef}
-        style={{ height: '500px' }}
+        style={{ height: '100%' }}
       >
         {props.messages.map((m, i) => {
           return (

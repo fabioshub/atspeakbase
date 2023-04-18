@@ -6,7 +6,7 @@ export function App() {
       {/* The rest of your app */}
       <ChatWindow
         position="left"
-        token="59489aea-0ecb-4f76-8e14-0e9bbb1e9eb9"
+        token="42888ed4-6102-4e15-85bd-4ef33d1487b5"
       />
     </>
   );
