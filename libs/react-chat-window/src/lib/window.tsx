@@ -1,6 +1,6 @@
+import React, { useEffect, useState } from 'react';
 import { message } from './chat';
 import styles from './react-chat-window.module.css';
-import React, { useEffect, useState } from 'react';
 
 export const Bubble = (props: message) => {
   const [time] = useState(props.time ? new Date(props.time) : new Date());

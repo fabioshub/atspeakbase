@@ -1,11 +1,11 @@
-import styles from './react-chat-window.module.css';
-import React, { useState, useEffect } from 'react';
-import { Socket, io } from 'socket.io-client';
-import { ChatWindowContainer } from './window';
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
+import React, { useEffect, useState } from 'react';
+import { Socket, io } from 'socket.io-client';
 import { v4 } from 'uuid';
+import styles from './react-chat-window.module.css';
+import { ChatWindowContainer } from './window';
 
-let socket: Socket;
+export let socket: Socket;
 
 interface chat {
   id: number;
@@ -172,7 +172,7 @@ export const MessageWindow = (props: ChatWindowProps) => {
   if (!mayLoad || minimized) {
     return (
       <div
-        style={{ width: '130px', borderRadius: '10px' }}
+        style={{ width: '150px', borderRadius: '10px' }}
         onClick={() => {
           setMini(false);
           setMayLoad(true);
