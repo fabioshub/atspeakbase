@@ -1,14 +1,29 @@
 import { ChatWindow, socket } from '@speakbase/react-chat-window';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import styles from './app.module.scss';
 import logo from './speakbaselogowhite.png';
 
 export function App() {
   const [input, setInput] = useState('');
+  const [tokenViaUrl, setTokenViaUrl] = useState(false);
   const [set, isSet] = useState(false);
+  const [search] = useSearchParams();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    let token = search.get('token');
+
+    if (!token?.length) {
+      token = localStorage.getItem('token');
+    } else {
+      setTokenViaUrl(true);
+      if (socket) {
+        socket.disconnect();
+        socket.connect();
+      }
+      localStorage.setItem('token', input);
+      isSet(true);
+    }
 
     if (token?.length) {
       setInput(token || '');
@@ -51,49 +66,59 @@ export function App() {
               style={{ maxWidth: '60px', marginBottom: '20px' }}
             ></img>
             <h3 style={{ padding: '0', margin: '0 0 10px 0' }}>
-              Enter your business token
+              {!tokenViaUrl
+                ? 'Enter your business token'
+                : 'Welcome to Speakbase'}
             </h3>
             <p style={{ maxWidth: '300px' }}>
               You can signup for a free dashboard at{' '}
               <a
                 style={{ fontWeight: 'bold' }}
-                href="https://speakbase.com/signup?redirect=/create"
+                href="https://speakbase.com/signup?redirect=/dashboard"
               >
                 speakbase.com
               </a>{' '}
               and obtain your token. Once entered, the chat window will appear.
             </p>
           </div>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="42888ed4-6102-4e15-85bd-4ef33d1487b5"
-            ></input>
-            <button
-              style={{ marginTop: '20px' }}
-              onClick={() => {
-                if (socket) {
-                  socket.disconnect();
-                  socket.connect();
-                }
-                localStorage.setItem('token', input);
-                isSet(true);
+          {!tokenViaUrl ? (
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
               }}
-              className={styles['submitbutton']}
             >
-              Initialize chat window
-            </button>
-          </div>
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="42888ed4-6102-4e15-85bd-4ef33d1487b5"
+              ></input>
+              <button
+                style={{ marginTop: '20px' }}
+                onClick={() => {
+                  if (socket) {
+                    socket.disconnect();
+                    socket.connect();
+                  }
+                  localStorage.setItem('token', input);
+                  isSet(true);
+                }}
+                className={styles['submitbutton']}
+              >
+                Initialize chat window
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
       {/* The rest of your app */}
-      <ChatWindow position="left" token={input} key={input} />
+      {set ? (
+        <ChatWindow
+          position="left"
+          token={input.length ? input : '42888ed4-6102-4e15-85bd-4ef33d1487b5'}
+          key={input}
+        />
+      ) : null}
     </>
   );
 }
