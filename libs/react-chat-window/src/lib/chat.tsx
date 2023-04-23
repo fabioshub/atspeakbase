@@ -1,11 +1,11 @@
-import styles from './react-chat-window.module.css';
-import React, { useState, useEffect } from 'react';
-import { Socket, io } from 'socket.io-client';
-import { ChatWindowContainer } from './window';
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
+import React, { useEffect, useState } from 'react';
+import { Socket, io } from 'socket.io-client';
 import { v4 } from 'uuid';
+import styles from './react-chat-window.module.css';
+import { ChatWindowContainer } from './window';
 
-let socket: Socket;
+export let socket: Socket;
 
 interface chat {
   id: number;
@@ -42,6 +42,9 @@ export interface ChatWindowProps {
   messageBoxPlaceholderText?: string;
   messages?: message[];
   onMessageSent?: (message: string) => void;
+  open?: boolean;
+  onOpen?: () => void;
+  onClose?: () => void;
 }
 
 export interface org {
@@ -169,13 +172,30 @@ export const MessageWindow = (props: ChatWindowProps) => {
     }
   }, [messages]);
 
+  useEffect(() => {
+    if (props.open !== undefined) {
+      setMini(!props.open);
+    }
+  }, [props.open]);
+
+  useEffect(() => {
+    if (props.open === true) {
+      setMayLoad(true);
+    }
+  }, []);
+
   if (!mayLoad || minimized) {
     return (
       <div
-        style={{ width: '130px', borderRadius: '10px' }}
+        style={{ width: '150px', borderRadius: '10px' }}
         onClick={() => {
-          setMini(false);
-          setMayLoad(true);
+          if (props.open === undefined) {
+            setMini(false);
+            setMayLoad(true);
+          }
+          if (props.onOpen) {
+            props.onOpen();
+          }
         }}
         className={`${styles['fixed']} ${styles['cursor-pointer']} ${
           styles['bottom-10']
@@ -252,7 +272,14 @@ export const MessageWindow = (props: ChatWindowProps) => {
       orgInfo={orgInfo}
       color={props.rightMessagesBackgroundColor}
       position={props.position}
-      setMini={() => setMini(true)}
+      setMini={() => {
+        if (props.open === undefined) {
+          setMini(true);
+        }
+        if (props.onClose) {
+          props.onClose();
+        }
+      }}
       sendMessage={sendMessage}
       message={message}
       messages={props.messages || messages}

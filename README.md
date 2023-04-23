@@ -72,6 +72,9 @@ export interface ChatWindowProps {
   sendText?: string;
   messageBoxPlaceholderText?: string;
   onMessageSent?: (message: string) => void;
+  open?: boolean;
+  onOpen?: () => void;
+  onClose?: () => void;
 }
 
 export interface message {
@@ -152,11 +155,30 @@ messageBoxPlaceholderText?: string;
 Optional message input placeholder text, which can be used to change the default **Type a message...** text.
 
 --------------
+
 ```
-onMessageSent?: (message: string) => void;
+open?: boolean;
 ```
 
-Optional on message sent handler, where message is the string input.
+Optional controlled open boolean. If set to open, the window will open, if set to close it will close.
+When open, a connection to the dashboard ia automatically opened when a token is provided.
+Connections will stay open, even when the window is closed again. Note that if you set the value to a boolean, you _must_ implement the ```onOpen``` and ```onClose``` function too, because the opening is now controlled.
+
+--------------
+
+```
+onOpen?: () => void;
+```
+
+optional on open callback, fired when the chat window is opened. If set, you must set the ```open``` prop yourself, because the chat window will then act in a controlled way, instead of a uncontrolled way.
+
+
+--------------
+```
+onClose?: () => void;
+```
+
+Optional on close callback, fired when the chat window is closed. If set, you must set the ```open``` prop yourself, because the chat window will then act in a controlled way, instead of a uncontrolled way.
 
 
 
