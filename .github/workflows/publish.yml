@@ -23,4 +23,4 @@ jobs:
           jq --arg release_version "$RELEASE_VERSION" '.version |= $release_version' package.json > tmp.json
           mv tmp.json package.json
           cat package.json
-      # - run: cd dist/libs/react-chat-window && npm publish --access public
+      - run: cd dist/libs/react-chat-window && npm publish --access public
