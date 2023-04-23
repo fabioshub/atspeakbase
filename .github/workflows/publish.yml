@@ -3,13 +3,15 @@ on:
   push:
     tags:        
       - '*' 
+
+env:
+  VITE_CHAT_URL: ${{ vars.VITE_CHAT_URL_PROD }}
+
 jobs:
   publish_to_npm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        env:
-          VITE_CHAT_URL: ${{ vars.VITE_CHAT_URL_PROD }}
         with:
           fetch-depth: 0
       - run: echo "VITE_CHAT_URL=$VITE_CHAT_URL" >> .env
