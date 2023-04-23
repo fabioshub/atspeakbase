@@ -8,13 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Create .env
         env:
           VITE_CHAT_URL: ${{ vars.VITE_CHAT_URL_PROD }}
-        run: |
-          echo "VITE_CHAT_URL=$VITE_CHAT_URL" >> .env
+        with:
+          fetch-depth: 0
+      - run: echo "VITE_CHAT_URL=$VITE_CHAT_URL" >> .env
       - run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - run: echo $RELEASE_VERSION
       - run: 
