@@ -85,13 +85,16 @@ export const MessageWindow = (props: ChatWindowProps) => {
     if ((!mayLoad && !initial) || !props.token) {
       return;
     }
-    socket = io(import.meta.env.VITE_CHAT_URL!, {
-      transports: ['websocket'],
-      auth: {
-        token: props.token,
-        clientId,
-      },
-    });
+    socket = io(
+      import.meta.env.VITE_CHAT_URL! || 'https://chat.speak-base.com',
+      {
+        transports: ['websocket'],
+        auth: {
+          token: props.token,
+          clientId,
+        },
+      }
+    );
     socket.on('orgInfo', (o: typeof orgInfo) => {
       console.log('info');
       setOrgInfo(o);
