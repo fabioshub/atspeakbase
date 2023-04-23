@@ -1,6 +1,6 @@
 version: '3'
 services:
-  chat-window-demo:
+  chat-window-demo-dev:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     build: 
@@ -9,5 +9,18 @@ services:
     ports:
       - '8888:80'
     restart: always
+    labels:
+      - dev
+  chat-window-demo-prod:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    build: 
+      context: .
+      dockerfile: apps/react-chat-window-demo-no-tailwind/Dockerfile
+    ports:
+      - '8889:80'
+    restart: always
+    labels:
+      - prod
 volumes:
   mysql: ~
