@@ -85,6 +85,7 @@ export const MessageWindow = (props: ChatWindowProps) => {
     if ((!mayLoad && !initial) || !props.token) {
       return;
     }
+    console.log('connecting', 'https://chat.speak-base.com');
     socket = io('https://chat.speak-base.com', {
       transports: ['websocket'],
       auth: {
