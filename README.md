@@ -1,6 +1,6 @@
 
 <p align="center">
-<img width="151" alt="speakbaselogo" src="https://user-images.githubusercontent.com/36661261/232208922-3e6eafe0-5ef4-4b42-9ca0-c2a0b48cf2dd.png">
+<img width="120" alt="speakbaselogo" src="https://user-images.githubusercontent.com/36661261/232208922-3e6eafe0-5ef4-4b42-9ca0-c2a0b48cf2dd.png">
   <h1 align="center">React chat window</h1>
   <p align="center">
     ✨ <a href="https://speak-base.com">https://speak-base.com</a> ✨
