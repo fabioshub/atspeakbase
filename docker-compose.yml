@@ -9,7 +9,7 @@ services:
     ports:
       - '8888:80'
     restart: always
-    labels:
+    profiles:
       - dev
   chat-window-demo-prod:
     extra_hosts:
@@ -20,7 +20,7 @@ services:
     ports:
       - '8889:80'
     restart: always
-    labels:
+    profiles:
       - prod
 volumes:
   mysql: ~
