@@ -4,6 +4,10 @@
   "license": "MIT",
   "scripts": {},
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabioshub/atspeakbase"
+  },
   "dependencies": {
     "@heroicons/react": "^2.0.17",
     "@nrwl/web": "15.9.2",
